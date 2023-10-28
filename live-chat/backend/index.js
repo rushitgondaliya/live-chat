@@ -13,6 +13,10 @@ const app = express();
 
 app.use(express.json()); // to accept json data
 
+/** Get image */
+// app.use(express.static(`./public`));
+app.use(express.static(path.join(__dirname, `./public`)));
+
 //all routes
 app.use("/api/user", userRoutes);
 app.use("/api/chat", chatRoutes);

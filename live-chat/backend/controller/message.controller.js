@@ -8,6 +8,14 @@ const Chat = require("../model/chat.model");
 //@access          Protected
 const allMessages = asyncHandler(async (req, res) => {
   try {
+    const reqBody = req.body;
+
+    if (req.file) {
+        reqBody.blog_image = req.file.filename;
+    } else {
+        throw new Error("image is required!");
+    }
+
     const messages = await Message.find({ chat: req.params.chatId })
       .populate("sender", "name pic email")
       .populate("chat");
